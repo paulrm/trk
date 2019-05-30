@@ -20,7 +20,7 @@ or people that don't affair to re-install their SO if they broke something too b
 git init --bare $HOME/.trk
 alias trk='/usr/bin/git --git-dir=$HOME/.trk/ --work-tree=/'
 alias trk-ls='trk ls-tree --full-tree -r HEAD'
-config trk --local status.showUntrackedFiles no
+trk config --local status.showUntrackedFiles no
 echo "alias trk='/usr/bin/git --git-dir=$HOME/.trk/ --work-tree=/'" >> $HOME/.bashrc
 echo "alias trk-ls='trk ls-tree --full-tree -r HEAD'                >> $HOME/.bashrc
 ```
