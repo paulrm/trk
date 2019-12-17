@@ -22,5 +22,5 @@ alias trk='/usr/bin/git --git-dir=$HOME/.trk/ --work-tree=/'
 alias trk-ls='trk ls-tree --full-tree -r HEAD'
 trk config --local status.showUntrackedFiles no
 echo "alias trk='/usr/bin/git --git-dir=$HOME/.trk/ --work-tree=/'" >> $HOME/.bashrc
-echo "alias trk-ls='trk ls-tree --full-tree -r HEAD'                >> $HOME/.bashrc
+echo "alias trk-ls='trk ls-tree --full-tree -r HEAD"                >> $HOME/.bashrc
 ```
