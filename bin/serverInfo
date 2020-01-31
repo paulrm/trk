@@ -1,0 +1,64 @@
+##
+## ServerInfo Ubuntu version
+##
+echo "usar: serverInfo [repo/op]"
+start=`date +%s`
+
+repo=0
+os_soft=0
+for param in $*
+do
+   echo "para=$param"
+   case $param in
+   "repo")
+        repo=1
+   ;;
+   "os")
+        os_soft=1
+   ;;
+esac 
+done
+
+echo "repos=$repo os_soft=$os_soft"
+
+##
+##
+##
+hostname                           > ~/etc/network.txt 
+ip addr                            >> ~/etc/network.txt 
+cat /etc/resolv.conf               >> ~/etc/network.txt
+route -n                           >> ~/etc/network.txt 
+
+##
+##
+##
+dpkg -l                           > ~/etc/dpkg.lst 
+snap list                         > ~/etc/snap.lst
+df -h / | sort | grep -v Filesystem > ~/etc/df.lst
+apt list --upgradable             > ~/etc/updates.lst
+
+###
+#npm list                          > ~/etc/npm.lst
+npm list -g                        > ~/etc/npm-global.lst
+npm list                           > ~/etc/npm.lst
+
+
+repo=1
+os_soft=1
+##############
+# lista de repos 
+echo "#  git repos"
+if [ "$repo" -eq 1 ]
+then
+    tmpList=/tmp/repos.lst
+    finalList=~/etc/repos.lst
+    > $finalList
+    find /root /home/paul.messina -type d -name ".git" > $tmpList 2> /dev/null
+    for repo in $( cat $tmpList )
+    do
+        echo $repo                     >> $finalList
+        git --git-dir=$repo remote -v  >> $finalList
+    done
+fi
+#
+#############
